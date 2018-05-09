@@ -91,66 +91,45 @@ class Mortgage extends MongoModels {
 
 
 
-    static findByUsername(username, callback) {
+    static findByCustomerId(customerId, callback) {
 
         const query = {
-            username: username.toLowerCase()
+            customerId: customerId
         };
 
-        this.findOne(query, callback);
+        console.log("query:" + query.customerId)
+        this.find(query, callback);
     }
             
 }
 
-Mortgage.collection = 'users';
+Mortgage.collection = 'mortgage';
 
 Mortgage.schema = Joi.object().keys({
     _id: Joi.object(),
-    status: Joi.number().default(1),
-    username: Joi.string(),
-    password: Joi.string(),
-    email: Joi.string().email().lowercase().required(),
-    userId:Joi.number(),
-    mobile:Joi.object().keys({
-        number:Joi.string(),
-        dateVerified: Joi.date().default(new Date()).required(),
-        verified: Joi.boolean(),
-        verificationCode:Joi.string(),
-        pin: Joi.string(),
-        dateSent: Joi.date().default(new Date()).required()
-    }),
-    emailVerification: Joi.object().keys({
-        dateValid: Joi.date().default(new Date()).required(),
-        valid: Joi.boolean(),
-        code: Joi.string(),
-        linkUri: Joi.string(),
-        dateSent: Joi.date().default(new Date()).required()
-    }),
-    countryCode: Joi.string().required().default('gb'),
-    devices: Joi.array().items(Joi.object().keys({
-        id: Joi.string().required(),
-        name: Joi.string().required()
-    })),
-    groups: Joi.array().items(Joi.object().keys({
-        id: Joi.string().required(),
-        name: Joi.string().required(),
-        permissions: Joi.array().items(
-            Joi.string()
-        )
-    })),
-    resetPassword: Joi.object().keys({
-        token: Joi.string().required(),
-        uriLink:Joi.string().required(),
-        tokenValid: Joi.boolean().required().default(false),
-        expires: Joi.date().required()
-    }),
-    timeCreated: Joi.date()
-});
 
+    customerId: Joi.string(),
+    accountInterestRate: Joi.number(),
+    amountGranted: Joi.number(),
+    amountAdvanced: Joi.number(),
+    repayment: Joi.number(),
+    grossOrNet: Joi.string(),
+    advanceDate: Joi.date(),
+    totalProductTerm: Joi.number(),
+    remainingProductTerm: Joi.number(),
+    twinAccount: Joi.boolean(),
+    accountType: Joi.number(),
+    principalBalance: Joi.number(),
+    interestBalance: Joi.number(),
+    currentBalance: Joi.number(),
+    openingDate: Joi.date(),
+    openingBalance: Joi.number(),
+    openingBranch: Joi.string()
+});
 
 Mortgage.indexes = [{
         key: {
-            customerCode: 1,
+            id: 1,
             unique: 1
         }
     }

@@ -14,7 +14,6 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "applicationinsights": "^1.0.1",
     "async": "2.x.x",
     "azure-ad-jwt": "^1.1.0",
     "bcrypt": "1.x.x",
@@ -45,13 +44,8 @@
     "lout": "10.x.x",
     "mongo-models": "1.x.x",
     "mongodb": "2.x.x",
-    "nodemailer": "3.x.x",
-    "nodemailer-markdown": "1.x.x",
     "object-assign": "4.x.x",
-    "sequelize": "^4.27.0",
     "slug": "0.9.x",
-    "tedious": "^2.1.5",
-    "twilio": "^3.10.0",
     "uuid": "3.x.x",
     "vision": "4.x.x",
     "visionary": "6.x.x",

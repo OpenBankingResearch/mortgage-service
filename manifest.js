@@ -10,7 +10,7 @@ const criteria = {
 
 
 const manifest = {
-    $meta: 'This file defines the authentication service',
+    $meta: 'This file defines the mortgage service',
     server: {
         debug: {
             request: ['error']
@@ -59,89 +59,26 @@ const manifest = {
                 register: 'hapi-mongo-models',
                 options: {
                     mongodb: Config.get('/hapiMongoModels/mongodb'),
-                    models: {
-                        AuthAttempt: './server/models/auth-attempt',
-                        Session: './server/models/session',
-                        User: './server/models/user'
+                    models: {                        
+                        Mortgage: './server/models/mortgage'
                     },
                     autoIndex: Config.get('/hapiMongoModels/autoIndex')
                 }
             }
         },
-        // {
-        //     plugin: {
-        //         register: './app-start/mssql'
-        //     }
-        // },
-        {
-            plugin: './server/auth'
-        },
-        {
-            plugin: './server/sendSms'
-        },
-        {
-            plugin: './server/mailer'
-        },
      
         {
-            plugin: './server/api/auth-attempts',
+         plugin: './server/api/mortgage',
             options: {
                 routes: {
                     prefix: '/api'
                 }
             }
         },
-        {
-            plugin: './server/api/index',
-            options: {
-                routes: {
-                    prefix: '/api'
-                }
-            }
-        },
-        {
-            plugin: './server/api/login',
-            options: {
-                routes: {
-                    prefix: '/api'
-                }
-            }
-        },
-        {
-            plugin: './server/api/logout',
-            options: {
-                routes: {
-                    prefix: '/api'
-                }
-            }
-        },
-        {
-            plugin: './server/api/sessions',
-            options: {
-                routes: {
-                    prefix: '/api'
-                }
-            }
-        },
-        {
-            plugin: './server/api/signup',
-            options: {
-                routes: {
-                    prefix: '/api'
-                }
-            }
-        },
-        {
-            plugin: './server/api/users',
-            options: {
-                routes: {
-                    prefix: '/api'
-                }
-            }
-        },
-        {
-            plugin: './server/web/index'
-        },
+
+        // {
+        //     plugin: './server/web/index'
+        // },
         {
             plugin: 'hapi-auth-jwt2'
         },
@@ -150,7 +87,7 @@ const manifest = {
                 'register': 'hapi-swagger',
                 'options': {
                     info: {
-                        'title': 'Motix Authentication API Documentation',
+                        'title': 'Mortgage API Documentation',
                         'version': Pack.version,
                     },
                     securityDefinitions: {
@@ -198,16 +135,8 @@ const manifest = {
                                 request: "*",
                                 error: "*"
                             }]
-                        }, {
-                            module: 'good-http',
-                            args: [process.env.LOG_API || 'http://MacBook-Pro-dom-2.local:4051/log/bulk', {
-                                wreck: {
-                                    headers: {
-                                        'x-api-key': 12345
-                                    }
-                                }
-                            }]
-                        }]
+                        }
+                    ]
 
 
                     }

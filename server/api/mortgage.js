@@ -14,15 +14,14 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'GET',
-        path: '/mortgage/{customerCode}',
+        path: '/mortgage/{customerId}',
+       
         config: {
-            auth: {
-                //strategy: Config.get('/authStrategy'),
-            },
+            tags: ['api'],
+            auth: false,
             validate: {
-                query: {
-                    customerCode: Joi.string().token().lowercase(),
-                    date: Joi.date()
+                params: {
+                    customerId: Joi.string().token().lowercase()
                     //,group: Joi.string(),
                     //fields: Joi.string(),
                     //sort: Joi.string().default('_id'),
@@ -34,14 +33,16 @@ internals.applyRoutes = function (server, next) {
         },
         handler: function (request, reply) {
 
-            const query = {};
+            const query = {id:request.params.customerId};
 
-            Mortgage.find(query, (err, results) => {
+            console.log('customer id:' + request.params.customerId)
+
+            Mortgage.findByCustomerId(request.params.customerId, (err, results) => {
 
                 if (err) {
                     return reply(err);
                 }
-
+                console.log("Error:" + err)
                 reply(results);
             });
         }
@@ -53,7 +54,7 @@ internals.applyRoutes = function (server, next) {
 
 exports.register = function (server, options, next) {
 
-    server.dependency(['auth', 'hapi-mongo-models'], internals.applyRoutes);
+    server.dependency(['hapi-mongo-models'], internals.applyRoutes);
 
     next();
 };

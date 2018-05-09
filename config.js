@@ -13,8 +13,8 @@ const criteria = {
 
 
 const config = {
-    $meta: 'This file configures the authentication service.',
-    projectName: 'Motix Authentication',
+    $meta: 'This is a mortgage micro service for the society hack',
+    projectName: 'Mortgage micro service',
     port: {
         web: {
             $filter: 'env',

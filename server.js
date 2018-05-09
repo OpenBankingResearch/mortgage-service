@@ -2,18 +2,6 @@
 const Composer = require('./index');
 const Config = require('./config').get('/');
 const Boom = require('boom');
-const AppInsights = require('applicationinsights');
-
-// register app to AzureApplicationInsight for monitoring purposes
-AppInsights.setup(Config.azureAppInsight.instrumentationKey)
-    .setAutoDependencyCorrelation(true)
-    .setAutoCollectRequests(true)
-    .setAutoCollectPerformance(true)
-    .setAutoCollectExceptions(true)
-    .setAutoCollectDependencies(true)
-    .setAutoCollectConsole(true)
-    .setUseDiskRetryCaching(true)
-    .start();
 
 Composer((err, server) => {
 
@@ -65,19 +53,8 @@ function badRequest (message, data){
     const cache = server.cache({ segment: 'sessions', expiresIn: 3 * 24 * 60 * 60 * 1000 });
     server.app.cache = cache;
 
-    server.auth.strategy('azuread', 'bell', {
-        provider: 'azuread',
-        password: Config.auth.azure.cookieSecret,
-        isSecure: false,
-        clientId: Config.auth.azure.clientId,
-        clientSecret: Config.auth.azure.clientSecret,
-        scope: ['openid', 'offline_access', 'profile'],
-        skipProfile: false,
-        config: { tenant: Config.auth.azure.tenant },
-    });
-
     server.start(() => {
 
-        console.log('Started on port ' + server.info.port);
+        console.log('Started mortgage service on port ' + server.info.port);
     });
 });
