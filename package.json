@@ -1,10 +1,10 @@
 {
-  "name": "frame",
+  "name": "mortgageService",
   "version": "12.1.0",
-  "description": "Motix Authentication Service",
+  "description": "Society Hack Mortgage Service",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect -e js,md server.js",
+    "start": "nodemon -e js,md server.js",
     "first-time-setup": "node first-time-setup.js",
     "test": "lab -c -L"
   },
