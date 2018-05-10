@@ -124,19 +124,7 @@ const manifest = {
                                 module: "good-console"
                             },
                             "stdout"
-                        ],
-                        HTTPReporter: [{
-                            module: 'good-squeeze',
-                            name: 'Squeeze',
-                            args: [{
-                                log: "*",
-                                response: "*",
-                                ops: "*",
-                                request: "*",
-                                error: "*"
-                            }]
-                        }
-                    ]
+                        ]
 
 
                     }

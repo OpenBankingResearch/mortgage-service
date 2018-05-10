@@ -1,5 +1,5 @@
 
-FROM node:8.0
+FROM node:8.6
 
 RUN mkdir -p /usr/src/app
 
@@ -7,10 +7,10 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 RUN npm install
 
 EXPOSE 80
 
-CMD [ "npm", "start" ]
+CMD [ "node", "server.js" ]
